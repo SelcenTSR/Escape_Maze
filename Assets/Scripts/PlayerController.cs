@@ -5,31 +5,34 @@ using Cinemachine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] InputController inputController;
+    public Transform cameraHolderTransform;
+    public float rotationSpeed = 3.5f;
+    public Rigidbody playerRigidbody;
+    Quaternion targetRotation;
+    Quaternion playerRotation;
 
-
-    float lookAmountVertical;
-    float lookAmountHorizontal;
-    float maxAngle = 15f;
-    float minAngle = -15;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerRigidbody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        inputController.HandleInputs();
+        HandleRotation();
     }
 
-
-
-    void CameraRotations()
+    public void HandleRotation()
     {
-        lookAmountVertical = lookAmountVertical + inputController.horizontalCameraMovement;
-        lookAmountHorizontal = lookAmountHorizontal - inputController.verticalCameraMovement;
-        lookAmountHorizontal = Mathf.Clamp(lookAmountHorizontal, minAngle, maxAngle);
+        targetRotation = Quaternion.Euler(0, cameraHolderTransform.eulerAngles.y, 0);
+        playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        if (inputController.verticalMovementInput != 0 || inputController.horizontalMovementInput != 0)
+        {
+            transform.rotation = playerRotation;
+        }
     }
+
+
+  
 }

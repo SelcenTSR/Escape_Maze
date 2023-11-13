@@ -17,7 +17,8 @@ public class InputController : MonoBehaviour
     public float verticalCameraMovement;
     public float horizontalCameraMovement;
     private Vector2 cameraInput;
-
+    public bool runInput;
+    public bool quickTurnInput;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +31,11 @@ public class InputController : MonoBehaviour
             inputActions = new PlayerInputController();
             inputActions.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>(); // pressing key values going to assign to the movementInput
             inputActions.PlayerMovement.CameraRotation.performed+= i => cameraInput = i.ReadValue<Vector2>();
+            inputActions.PlayerMovement.Run.performed += i => runInput=true;
+            inputActions.PlayerMovement.Run.canceled += i => runInput = false;
+            inputActions.PlayerMovement.QuickTurn.performed += i => quickTurnInput = true;
+            inputActions.PlayerMovement.QuickTurn.performed += i => quickTurnInput = false;
+
         }
         inputActions.Enable();
     }
@@ -48,7 +54,7 @@ public class InputController : MonoBehaviour
     {
         horizontalMovementInput = movementInput.x;
         verticalMovementInput = movementInput.y;
-        playerAnimator.HandleAnimatorValues(horizontalMovementInput, verticalMovementInput);
+        playerAnimator.HandleAnimatorValues(horizontalMovementInput, verticalMovementInput,runInput);
     }
 
     void HandleCameraInputs()
@@ -56,6 +62,13 @@ public class InputController : MonoBehaviour
         horizontalCameraMovement = cameraInput.x;
         verticalCameraMovement = cameraInput.y;
        
+    }
+    void HandleQuickTurnInput()
+    {
+        if (quickTurnInput)
+        {
+            playerAnimator.PlayAnimationWithoutRootMotion("Quick Turn");
+        }
     }
 
 }

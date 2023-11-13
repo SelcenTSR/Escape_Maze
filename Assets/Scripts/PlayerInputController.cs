@@ -44,6 +44,24 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""66b7308a-687e-4c9c-811b-b63acbd207af"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": "" Quick Turn"",
+                    ""type"": ""Button"",
+                    ""id"": ""0478be44-bba9-40b9-aebf-499aafcb08a8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -112,6 +130,28 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
                     ""action"": ""CameraRotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4bdbf259-14b9-4d69-b66b-e87fd22c5474"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c5bf726-93df-4d3c-a476-9c3d23effd0a"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": "" Quick Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -122,6 +162,8 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         m_PlayerMovement = asset.FindActionMap("PlayerMovement", throwIfNotFound: true);
         m_PlayerMovement_Movement = m_PlayerMovement.FindAction("Movement", throwIfNotFound: true);
         m_PlayerMovement_CameraRotation = m_PlayerMovement.FindAction("CameraRotation", throwIfNotFound: true);
+        m_PlayerMovement_Run = m_PlayerMovement.FindAction("Run", throwIfNotFound: true);
+        m_PlayerMovement_QuickTurn = m_PlayerMovement.FindAction(" Quick Turn", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -185,12 +227,16 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
     private List<IPlayerMovementActions> m_PlayerMovementActionsCallbackInterfaces = new List<IPlayerMovementActions>();
     private readonly InputAction m_PlayerMovement_Movement;
     private readonly InputAction m_PlayerMovement_CameraRotation;
+    private readonly InputAction m_PlayerMovement_Run;
+    private readonly InputAction m_PlayerMovement_QuickTurn;
     public struct PlayerMovementActions
     {
         private @PlayerInputController m_Wrapper;
         public PlayerMovementActions(@PlayerInputController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerMovement_Movement;
         public InputAction @CameraRotation => m_Wrapper.m_PlayerMovement_CameraRotation;
+        public InputAction @Run => m_Wrapper.m_PlayerMovement_Run;
+        public InputAction @QuickTurn => m_Wrapper.m_PlayerMovement_QuickTurn;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -206,6 +252,12 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
             @CameraRotation.started += instance.OnCameraRotation;
             @CameraRotation.performed += instance.OnCameraRotation;
             @CameraRotation.canceled += instance.OnCameraRotation;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
+            @QuickTurn.started += instance.OnQuickTurn;
+            @QuickTurn.performed += instance.OnQuickTurn;
+            @QuickTurn.canceled += instance.OnQuickTurn;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -216,6 +268,12 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
             @CameraRotation.started -= instance.OnCameraRotation;
             @CameraRotation.performed -= instance.OnCameraRotation;
             @CameraRotation.canceled -= instance.OnCameraRotation;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
+            @QuickTurn.started -= instance.OnQuickTurn;
+            @QuickTurn.performed -= instance.OnQuickTurn;
+            @QuickTurn.canceled -= instance.OnQuickTurn;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -237,5 +295,7 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnCameraRotation(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
+        void OnQuickTurn(InputAction.CallbackContext context);
     }
 }

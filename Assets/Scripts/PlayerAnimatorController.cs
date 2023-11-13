@@ -7,14 +7,19 @@ public class PlayerAnimatorController : MonoBehaviour
     Animator animator;
     float snappedHorizontal;
     float snappedVertical;
-
+    PlayerController playerController;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        playerController = GetComponent<PlayerController>();
     }
-
-    public void HandleAnimatorValues(float horizontalMovement,float verticalMovement)
+    public void PlayAnimationWithoutRootMotion(string targetAnimation)
+    {
+        animator.applyRootMotion = false;
+        animator.CrossFade(targetAnimation, .2f);
+    }
+    public void HandleAnimatorValues(float horizontalMovement,float verticalMovement,bool isRunning)
     {
         if (horizontalMovement > 0)
         {
@@ -40,7 +45,24 @@ public class PlayerAnimatorController : MonoBehaviour
         {
             snappedVertical = 0;
         }
+
+        if (isRunning && snappedVertical>0)
+        {
+            snappedVertical = 2;
+        }
+
         animator.SetFloat("Horizontal", snappedHorizontal, 0.1f, Time.deltaTime);
         animator.SetFloat("Vertical", snappedVertical, 0.1f, Time.deltaTime);
+    }
+
+    public void OnAnimationMove()
+    {
+        Vector3 animatorDeltaPos = animator.deltaPosition;
+        animatorDeltaPos.y = 0;
+
+        Vector3 velocity = animatorDeltaPos / Time.deltaTime;
+        playerController.playerRigidbody.drag = 0;
+        playerController.playerRigidbody.velocity = velocity;
+        transform.rotation *= animator.deltaRotation;
     }
 }
