@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class PlayerAnimatorController : MonoBehaviour
 {
-    Animator animator;
+    public Animator animator;
     float snappedHorizontal;
     float snappedVertical;
     PlayerController playerController;
+
+   [SerializeField] RigBuilder rigBuilder;
+    public TwoBoneIKConstraint rightHandIK,leftHandIK;
     // Start is called before the first frame update
     void Start()
     {
+        rigBuilder = GetComponent<RigBuilder>();
         animator = GetComponent<Animator>();
         playerController = GetComponent<PlayerController>();
     }
@@ -64,5 +69,13 @@ public class PlayerAnimatorController : MonoBehaviour
         playerController.playerRigidbody.drag = 0;
         playerController.playerRigidbody.velocity = velocity;
         transform.rotation *= animator.deltaRotation;
+    }
+
+
+    public void AssignHandIK(RightHandIKTarget rightHand, LeftHandIKTarget leftHand)
+    {
+        leftHandIK.data.target = leftHand.transform;
+        rightHandIK.data.target = rightHand.transform;
+        rigBuilder.Build();
     }
 }

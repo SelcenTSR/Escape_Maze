@@ -10,11 +10,12 @@ public class PlayerController : MonoBehaviour
     public Rigidbody playerRigidbody;
     Quaternion targetRotation;
     Quaternion playerRotation;
-
-
+    public bool isAiming;
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
     }
 
@@ -22,7 +23,10 @@ public class PlayerController : MonoBehaviour
     {
         HandleRotation();
     }
-
+    private void Update()
+    {
+        isAiming = animator.GetBool("isAiming");
+    }
     public void HandleRotation()
     {
         targetRotation = Quaternion.Euler(0, cameraHolderTransform.eulerAngles.y, 0);

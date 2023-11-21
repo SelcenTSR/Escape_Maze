@@ -19,6 +19,9 @@ public class InputController : MonoBehaviour
     private Vector2 cameraInput;
     public bool runInput;
     public bool quickTurnInput;
+
+
+    public bool amingInput;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +38,8 @@ public class InputController : MonoBehaviour
             inputActions.PlayerMovement.Run.canceled += i => runInput = false;
             inputActions.PlayerMovement.QuickTurn.performed += i => quickTurnInput = true;
             inputActions.PlayerMovement.QuickTurn.performed += i => quickTurnInput = false;
-
+            inputActions.PlayerActions.Aim.performed += i => amingInput = true;
+            inputActions.PlayerActions.Aim.canceled += i => amingInput = false;
         }
         inputActions.Enable();
     }
@@ -49,12 +53,24 @@ public class InputController : MonoBehaviour
     {
         HandleMovementInputs();
         HandleCameraInputs();
+        HandleAmingInput();
     }
     void HandleMovementInputs()
     {
         horizontalMovementInput = movementInput.x;
         verticalMovementInput = movementInput.y;
         playerAnimator.HandleAnimatorValues(horizontalMovementInput, verticalMovementInput,runInput);
+
+        if (verticalMovementInput != 0 || horizontalMovementInput != 0)
+        {
+            playerAnimator.rightHandIK.weight = 0;
+            playerAnimator.leftHandIK.weight = 0;
+        }
+        else
+        {
+            playerAnimator.rightHandIK.weight = 1;
+            playerAnimator.leftHandIK.weight = 1;
+        }
     }
 
     void HandleCameraInputs()
@@ -68,6 +84,23 @@ public class InputController : MonoBehaviour
         if (quickTurnInput)
         {
             playerAnimator.PlayAnimationWithoutRootMotion("Quick Turn");
+        }
+    }
+
+    private void HandleAmingInput()
+    {
+        if(verticalMovementInput!=0|| horizontalMovementInput != 0)
+        {
+            amingInput = false;
+            playerAnimator.animator.SetBool("isAiming", false);
+        }
+        if (amingInput)
+        {
+            playerAnimator.animator.SetBool("isAiming", true);
+        }
+        else
+        {
+            playerAnimator.animator.SetBool("isAiming", false);
         }
     }
 

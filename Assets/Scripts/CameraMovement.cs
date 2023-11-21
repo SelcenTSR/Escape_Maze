@@ -7,7 +7,10 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] InputController inputController;
     [SerializeField] GameObject cameraPivot;
     [SerializeField] GameObject player;
+    [SerializeField] GameObject cinemachine;
     // Start is called before the first frame update
+    [SerializeField] PlayerController playerController;
+    public Transform aimedCameraPosition;
 
     float lookAmountVertical;
     float lookAmountHorizontal;
@@ -33,27 +36,61 @@ public class CameraMovement : MonoBehaviour
 
     void FollowPlayer()
     {
-        targetPos = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraFollowVelocity, cameraSmoothTime * Time.deltaTime);
-        transform.position = targetPos;
+        if (playerController.isAiming)
+        {
+            targetPos = Vector3.SmoothDamp(transform.position, aimedCameraPosition.transform.position, ref cameraFollowVelocity, cameraSmoothTime * Time.deltaTime);
+            transform.position = targetPos;
+        }
+        else
+        {
+            targetPos = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraFollowVelocity, cameraSmoothTime * Time.deltaTime);
+            transform.position = targetPos;
+        }
+        
     }
 
     void CameraRotations()
     {
-        lookAmountVertical = lookAmountVertical + inputController.horizontalCameraMovement;
-        lookAmountHorizontal = lookAmountHorizontal - inputController.verticalCameraMovement;
-        lookAmountHorizontal = Mathf.Clamp(lookAmountHorizontal, minAngle, maxAngle);
-        cameraRot = Vector3.zero;
-        cameraRot.y = lookAmountVertical;
-        targetRot = Quaternion.Euler(cameraRot);
-        targetRot = Quaternion.Slerp(transform.rotation, targetRot, cameraSmoothTime);
-        transform.rotation = targetRot;
-      
+        if (playerController.isAiming)
+        {
+            cameraPivot.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            lookAmountVertical = lookAmountVertical + inputController.horizontalCameraMovement;
+            lookAmountHorizontal = lookAmountHorizontal - inputController.verticalCameraMovement;
+            lookAmountHorizontal = Mathf.Clamp(lookAmountHorizontal, minAngle, maxAngle);
+            cameraRot = Vector3.zero;
+            cameraRot.y = lookAmountVertical;
+            targetRot = Quaternion.Euler(cameraRot);
+            targetRot = Quaternion.Slerp(transform.rotation, targetRot, cameraSmoothTime);
+            transform.rotation = targetRot;
+           
 
-        cameraRot = Vector3.zero;
-        cameraRot.x = lookAmountHorizontal;
-        targetRot = Quaternion.Euler(cameraRot);
-        targetRot = Quaternion.Slerp(cameraPivot.transform.localRotation, targetRot, cameraSmoothTime);
-        cameraPivot.transform.localRotation = targetRot;
+            cameraRot = Vector3.zero;
+            cameraRot.x = lookAmountHorizontal;
+            targetRot = Quaternion.Euler(cameraRot);
+            targetRot = Quaternion.Slerp(cameraPivot.transform.localRotation, targetRot, cameraSmoothTime);
+            cinemachine.transform.localRotation = targetRot;
+        }
+        else
+        {
+            cinemachine.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            lookAmountVertical = lookAmountVertical + inputController.horizontalCameraMovement;
+            lookAmountHorizontal = lookAmountHorizontal - inputController.verticalCameraMovement;
+            lookAmountHorizontal = Mathf.Clamp(lookAmountHorizontal, minAngle, maxAngle);
+            cameraRot = Vector3.zero;
+            cameraRot.y = lookAmountVertical;
+            targetRot = Quaternion.Euler(cameraRot);
+            targetRot = Quaternion.Slerp(transform.rotation, targetRot, cameraSmoothTime);
+            transform.rotation = targetRot;
+
+
+            cameraRot = Vector3.zero;
+            cameraRot.x = lookAmountHorizontal;
+            targetRot = Quaternion.Euler(cameraRot);
+            targetRot = Quaternion.Slerp(cameraPivot.transform.localRotation, targetRot, cameraSmoothTime);
+            cameraPivot.transform.localRotation = targetRot;
+        }
+
+       
     }
 
 }
