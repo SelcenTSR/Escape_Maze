@@ -8,6 +8,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] GameObject cameraPivot;
     [SerializeField] GameObject player;
     [SerializeField] GameObject cinemachine;
+
     // Start is called before the first frame update
     [SerializeField] PlayerController playerController;
     public Transform aimedCameraPosition;
@@ -21,6 +22,7 @@ public class CameraMovement : MonoBehaviour
     Vector3 cameraRot;
     Quaternion targetRot;
     float cameraSmoothTime = .2f;
+    float aimedCameraSmoothTime = 3f;
 
     // Update is called once per frame
     void Update()
@@ -57,17 +59,18 @@ public class CameraMovement : MonoBehaviour
             lookAmountVertical = lookAmountVertical + inputController.horizontalCameraMovement;
             lookAmountHorizontal = lookAmountHorizontal - inputController.verticalCameraMovement;
             lookAmountHorizontal = Mathf.Clamp(lookAmountHorizontal, minAngle, maxAngle);
+
             cameraRot = Vector3.zero;
             cameraRot.y = lookAmountVertical;
             targetRot = Quaternion.Euler(cameraRot);
-            targetRot = Quaternion.Slerp(transform.rotation, targetRot, cameraSmoothTime);
+            targetRot = Quaternion.Slerp(transform.rotation, targetRot, aimedCameraSmoothTime);
             transform.rotation = targetRot;
            
 
             cameraRot = Vector3.zero;
             cameraRot.x = lookAmountHorizontal;
             targetRot = Quaternion.Euler(cameraRot);
-            targetRot = Quaternion.Slerp(cameraPivot.transform.localRotation, targetRot, cameraSmoothTime);
+            targetRot = Quaternion.Slerp(cameraPivot.transform.localRotation, targetRot, aimedCameraSmoothTime);
             cinemachine.transform.localRotation = targetRot;
         }
         else

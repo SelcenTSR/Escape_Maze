@@ -10,8 +10,15 @@ public class PlayerAnimatorController : MonoBehaviour
     float snappedVertical;
     PlayerController playerController;
 
-   [SerializeField] RigBuilder rigBuilder;
+   [SerializeField] RigBuilder rigBuilder;// hold the weapon properly
     public TwoBoneIKConstraint rightHandIK,leftHandIK;
+
+
+//    [Header("Aiming Constraints")]
+  /*  public MultiAimConstraint spine01; // turn the character toward the aiming target
+    public MultiAimConstraint spine02;
+    public MultiAimConstraint head;*/
+
     // Start is called before the first frame update
     void Start()
     {
@@ -78,4 +85,21 @@ public class PlayerAnimatorController : MonoBehaviour
         rightHandIK.data.target = rightHand.transform;
         rigBuilder.Build();
     }
+
+
+   /* public void UpdateAimConstraints()
+    {
+        if (playerController.isAiming)
+        {
+            spine01.weight = .3f;
+            spine02.weight = .3f;
+            head.weight = .7f;
+        }
+        else
+        {
+            spine01.weight = 0;
+            spine02.weight =0;
+            head.weight = 0;
+        }
+    }*/
 }

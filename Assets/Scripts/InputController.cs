@@ -20,7 +20,7 @@ public class InputController : MonoBehaviour
     public bool runInput;
     public bool quickTurnInput;
 
-
+    public bool shootInput;
     public bool amingInput;
     // Start is called before the first frame update
     void Start()
@@ -40,6 +40,8 @@ public class InputController : MonoBehaviour
             inputActions.PlayerMovement.QuickTurn.performed += i => quickTurnInput = false;
             inputActions.PlayerActions.Aim.performed += i => amingInput = true;
             inputActions.PlayerActions.Aim.canceled += i => amingInput = false;
+            inputActions.PlayerActions.Shoot.performed += i => shootInput = true;
+            inputActions.PlayerActions.Shoot.canceled += i => shootInput = false;
         }
         inputActions.Enable();
     }
@@ -54,6 +56,7 @@ public class InputController : MonoBehaviour
         HandleMovementInputs();
         HandleCameraInputs();
         HandleAmingInput();
+        HandleShootingInput();
     }
     void HandleMovementInputs()
     {
@@ -101,6 +104,18 @@ public class InputController : MonoBehaviour
         else
         {
             playerAnimator.animator.SetBool("isAiming", false);
+        }
+
+        //playerAnimator.UpdateAimConstraints();
+    }
+
+
+    private void HandleShootingInput()
+    {
+        if (shootInput && amingInput)
+        {
+            shootInput = false;
+            Debug.Log("a");
         }
     }
 
