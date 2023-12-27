@@ -11,10 +11,12 @@ public class PlayerEquipmentManager : MonoBehaviour
     RightHandIKTarget rightHandIK;
     LeftHandIKTarget leftHandIK;
 
+    public WeaponManager weaponManager;
     //subWeaponItem // knife
     private void Awake()
     {
         animatorController = GetComponent<PlayerAnimatorController>();
+        
         LoadWeaponLoaderSlot();
     }
     private void Start()
@@ -34,7 +36,7 @@ public class PlayerEquipmentManager : MonoBehaviour
         animatorController.animator.runtimeAnimatorController = weapon.weaponAnimator;
         rightHandIK = weaponLoaderSlot.currentWeaponModel.GetComponentInChildren<RightHandIKTarget>();
         leftHandIK = weaponLoaderSlot.currentWeaponModel.GetComponentInChildren<LeftHandIKTarget>();
-
+        weaponManager = weaponLoaderSlot.currentWeaponModel.GetComponentInChildren<WeaponManager>();
         animatorController.AssignHandIK(rightHandIK,leftHandIK);
     }
 }

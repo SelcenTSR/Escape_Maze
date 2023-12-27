@@ -11,12 +11,18 @@ public class PlayerController : MonoBehaviour
     Quaternion targetRotation;
     Quaternion playerRotation;
     public bool isAiming;
+    public bool isPerformingAction;
     Animator animator;
+
+    PlayerAnimatorController playerAnimator;
+    PlayerEquipmentManager playerEquipmentManager;
     // Start is called before the first frame update
     void Start()
     {
+        playerAnimator= GetComponent<PlayerAnimatorController>();
         animator = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
+        playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
     }
 
     private void FixedUpdate()
@@ -25,6 +31,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        isPerformingAction = animator.GetBool("isPerformingAction");
         isAiming = animator.GetBool("isAiming");
     }
     public void HandleRotation()
@@ -37,6 +44,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void UseWeapon()
+    {
+        if (isPerformingAction)
+        {
+            return;
+        }
+        playerAnimator.PlayAnimationWithoutRootMotion("Pistol_Shoot",true);
+        playerEquipmentManager.weaponManager.ShootWeapon();
+    }
 
   
 }

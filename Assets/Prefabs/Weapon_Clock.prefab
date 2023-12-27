@@ -32,6 +32,37 @@ Transform:
   - {fileID: 8705837518469437886}
   m_Father: {fileID: 5547832503393652944}
   m_LocalEulerAnglesHint: {x: 1.284, y: 102.162, z: 84.639}
+--- !u!1 &585459192682787279
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1203213620013131058}
+  m_Layer: 0
+  m_Name: Weapon_BulletCase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1203213620013131058
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585459192682787279}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0075, y: 0.0765, z: -0.0142}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8705837518469437886}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1681558895453896146
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,6 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5547832503393652944}
+  - component: {fileID: 760818595609343353}
   m_Layer: 0
   m_Name: Weapon_Clock
   m_TagString: Untagged
@@ -64,6 +96,53 @@ Transform:
   - {fileID: 3512291174009479009}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &760818595609343353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681558895453896146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3aa639a2951411f8d18a47aca804a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponMuzzleFlashFX: {fileID: 5073276199555533151, guid: c0586fdc8e1ff48b98ff12414ef6af09, type: 3}
+  weaponBulletCaseFX: {fileID: 0}
+  weaponMuzzleFlashTransform: {fileID: 3015716691947777}
+  weaponBulletCaseTransform: {fileID: 1203213620013131058}
+--- !u!1 &7954220863968941041
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3015716691947777}
+  m_Layer: 0
+  m_Name: 'Weapon_MuzzleFlash '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3015716691947777
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7954220863968941041}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.6310905, y: -0.6172783, z: -0.3297962, w: 0.33455467}
+  m_LocalPosition: {x: 0.0004969551, y: 0.06861512, z: 0.14230445}
+  m_LocalScale: {x: 0.06, y: 0.06, z: 0.06}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8705837518469437886}
+  m_LocalEulerAnglesHint: {x: -123.961, y: -0.33200073, z: -88.556}
 --- !u!1001 &8321748101150096809
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -198,9 +277,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 841487955527115799, guid: 94db85316ed3b4673baaa446cfca26f9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1203213620013131058}
+    - targetCorrespondingSourceObject: {fileID: 841487955527115799, guid: 94db85316ed3b4673baaa446cfca26f9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3015716691947777}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 64810140951838381, guid: 94db85316ed3b4673baaa446cfca26f9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1537399509971082214}
   m_SourcePrefab: {fileID: 100100000, guid: 94db85316ed3b4673baaa446cfca26f9, type: 3}
+--- !u!1 &8330121868607734532 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 64810140951838381, guid: 94db85316ed3b4673baaa446cfca26f9, type: 3}
+  m_PrefabInstance: {fileID: 8321748101150096809}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1537399509971082214
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8330121868607734532}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &8705837518469437886 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 841487955527115799, guid: 94db85316ed3b4673baaa446cfca26f9, type: 3}

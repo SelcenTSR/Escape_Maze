@@ -26,7 +26,7 @@ public class PlayerAnimatorController : MonoBehaviour
         animator = GetComponent<Animator>();
         playerController = GetComponent<PlayerController>();
     }
-    public void PlayAnimationWithoutRootMotion(string targetAnimation)
+    public void PlayAnimationWithoutRootMotion(string targetAnimation,bool isPerformingAction)
     {
         animator.applyRootMotion = false;
         animator.CrossFade(targetAnimation, .2f);

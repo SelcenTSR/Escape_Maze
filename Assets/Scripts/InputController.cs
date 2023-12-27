@@ -86,7 +86,7 @@ public class InputController : MonoBehaviour
     {
         if (quickTurnInput)
         {
-            playerAnimator.PlayAnimationWithoutRootMotion("Quick Turn");
+            playerAnimator.PlayAnimationWithoutRootMotion("Quick Turn",true);
         }
     }
 
@@ -116,6 +116,7 @@ public class InputController : MonoBehaviour
         {
             shootInput = false;
             Debug.Log("a");
+            GetComponent<PlayerController>().UseWeapon();
         }
     }
 
