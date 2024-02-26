@@ -12,7 +12,8 @@ public class WeaponManager : MonoBehaviour
     public Transform weaponMuzzleFlashTransform;
 
 
-
+    public float bulletRange = 100f;
+    public LayerMask shootableLayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,9 +34,9 @@ public class WeaponManager : MonoBehaviour
         GameObject particle = muzzleFlash;
         DOVirtual.DelayedCall(2,null,false).OnComplete(() => Destroy(particle));
         RaycastHit hit;
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward,out hit))
+        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward,out hit,bulletRange,shootableLayer))
         {
-            Debug.Log(hit.transform.gameObject);
+            Debug.Log(hit.collider.gameObject.layer);
         }
 
     }

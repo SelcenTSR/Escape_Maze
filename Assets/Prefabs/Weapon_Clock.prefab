@@ -109,9 +109,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponMuzzleFlashFX: {fileID: 5073276199555533151, guid: c0586fdc8e1ff48b98ff12414ef6af09, type: 3}
-  weaponBulletCaseFX: {fileID: 0}
   weaponMuzzleFlashTransform: {fileID: 3015716691947777}
-  weaponBulletCaseTransform: {fileID: 1203213620013131058}
+  bulletRange: 100
+  shootableLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &7954220863968941041
 GameObject:
   m_ObjectHideFlags: 0
