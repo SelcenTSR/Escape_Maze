@@ -92,7 +92,7 @@ public class InputController : MonoBehaviour
 
     private void HandleAmingInput()
     {
-        if(verticalMovementInput!=0|| horizontalMovementInput != 0)
+        if(verticalMovementInput!=0 || horizontalMovementInput != 0)
         {
             amingInput = false;
             playerAnimator.animator.SetBool("isAiming", false);

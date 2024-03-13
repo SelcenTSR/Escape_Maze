@@ -36,12 +36,22 @@ public class PlayerController : MonoBehaviour
     }
     public void HandleRotation()
     {
-        targetRotation = Quaternion.Euler(0, cameraHolderTransform.eulerAngles.y, 0);
-        playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        if (inputController.verticalMovementInput != 0 || inputController.horizontalMovementInput != 0)
+        if (isAiming)
         {
+            targetRotation = Quaternion.Euler(0, cameraHolderTransform.eulerAngles.y, 0);
+            playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             transform.rotation = playerRotation;
         }
+        else
+        {
+            targetRotation = Quaternion.Euler(0, cameraHolderTransform.eulerAngles.y, 0);
+            playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            if (inputController.verticalMovementInput != 0 || inputController.horizontalMovementInput != 0)
+            {
+                transform.rotation = playerRotation;
+            }
+        }
+        
     }
 
     public void UseWeapon()

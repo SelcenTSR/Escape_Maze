@@ -5,9 +5,9 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField] InputController inputController;
-    [SerializeField] GameObject cameraPivot;
+    [SerializeField] Transform cameraPivot;
     [SerializeField] GameObject player;
-    [SerializeField] GameObject cinemachine;
+    [SerializeField] Camera cameraObject;
 
     // Start is called before the first frame update
     [SerializeField] PlayerController playerController;
@@ -17,10 +17,13 @@ public class CameraMovement : MonoBehaviour
     float lookAmountHorizontal;
     float maxAngle = 15f;
     float minAngle = -15;
+
     Vector3 cameraFollowVelocity=Vector3.zero;
     Vector3 targetPos;
     Vector3 cameraRot;
+
     Quaternion targetRot;
+
     float cameraSmoothTime = .2f;
     float aimedCameraSmoothTime = 3f;
 
@@ -71,11 +74,11 @@ public class CameraMovement : MonoBehaviour
             cameraRot.x = lookAmountHorizontal;
             targetRot = Quaternion.Euler(cameraRot);
             targetRot = Quaternion.Slerp(cameraPivot.transform.localRotation, targetRot, aimedCameraSmoothTime);
-            cinemachine.transform.localRotation = targetRot;
+            cameraObject.transform.localRotation = targetRot;
         }
         else
         {
-            cinemachine.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            cameraObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
             lookAmountVertical = lookAmountVertical + inputController.horizontalCameraMovement;
             lookAmountHorizontal = lookAmountHorizontal - inputController.verticalCameraMovement;
             lookAmountHorizontal = Mathf.Clamp(lookAmountHorizontal, minAngle, maxAngle);
