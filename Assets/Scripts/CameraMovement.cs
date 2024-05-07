@@ -11,12 +11,12 @@ public class CameraMovement : MonoBehaviour
 
     // Start is called before the first frame update
     [SerializeField] PlayerController playerController;
-    public Transform aimedCameraPosition;
+    public Transform aimedCameraPosition;  // aim yaptığımızda bu pozisyonu takip edecek 
 
     float lookAmountVertical;
     float lookAmountHorizontal;
-    float maxAngle = 15f;
-    float minAngle = -15;
+    float maxAngle = 12f;
+    float minAngle = -12;
 
     Vector3 cameraFollowVelocity=Vector3.zero;
     Vector3 targetPos;
@@ -31,12 +31,7 @@ public class CameraMovement : MonoBehaviour
     void Update()
     {
         FollowPlayer();
-        if (Input.GetMouseButton(0))
-        {
-            inputController.HandleInputs();
-            CameraRotations();
-        }
-        
+        CameraRotations();
     }
 
     void FollowPlayer()

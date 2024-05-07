@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        inputController.HandleInputs();
         isPerformingAction = animator.GetBool("isPerformingAction");
         isAiming = animator.GetBool("isAiming");
     }

@@ -14,10 +14,10 @@ public class PlayerAnimatorController : MonoBehaviour
     public TwoBoneIKConstraint rightHandIK,leftHandIK;
 
 
-//    [Header("Aiming Constraints")]
-  /*  public MultiAimConstraint spine01; // turn the character toward the aiming target
+    [Header("Aiming Constraints")]
+    public MultiAimConstraint spine01; // turn the character toward the aiming target
     public MultiAimConstraint spine02;
-    public MultiAimConstraint head;*/
+    public MultiAimConstraint head;
 
     // Start is called before the first frame update
     void Start()
@@ -87,7 +87,7 @@ public class PlayerAnimatorController : MonoBehaviour
     }
 
 
-   /* public void UpdateAimConstraints()
+   public void UpdateAimConstraints()
     {
         if (playerController.isAiming)
         {
@@ -98,8 +98,8 @@ public class PlayerAnimatorController : MonoBehaviour
         else
         {
             spine01.weight = 0;
-            spine02.weight =0;
+            spine02.weight = 0;
             head.weight = 0;
         }
-    }*/
+    }
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Item/Weapon Item")]
 
-
 public class WeaponItem : Item
 {
     [Header("Weapon Animation")]

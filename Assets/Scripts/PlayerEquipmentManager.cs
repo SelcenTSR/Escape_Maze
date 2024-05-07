@@ -15,8 +15,7 @@ public class PlayerEquipmentManager : MonoBehaviour
     //subWeaponItem // knife
     private void Awake()
     {
-        animatorController = GetComponent<PlayerAnimatorController>();
-        
+        animatorController = GetComponent<PlayerAnimatorController>();  
         LoadWeaponLoaderSlot();
     }
     private void Start()
@@ -26,10 +25,11 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     private void LoadWeaponLoaderSlot()
     {
-
         weaponLoaderSlot = GetComponentInChildren<WeaponLoaderSlot>();
     }
 
+    //silah animasyonlarına geçiş
+    //player'ın eline silahı alma 
     private void LoadCurrentWeapon()
     {
         weaponLoaderSlot.LoadWeaponModel(weapon);
