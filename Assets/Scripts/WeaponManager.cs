@@ -37,6 +37,11 @@ public class WeaponManager : MonoBehaviour
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward,out hit,bulletRange,shootableLayer))
         {
             Debug.Log(hit.collider.gameObject.layer);
+            ZombieEffectManager zombie = hit.collider.GetComponent<ZombieEffectManager>();
+            if (zombie != null)
+            {
+                zombie.DamageZombie();
+            }
         }
 
     }

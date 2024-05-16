@@ -14,10 +14,16 @@ public class PursueTargetState : State
 
     public override State Tick(ZombieManager zombieManager)
     {
+        if (zombieManager.isPerformingAction)
+        {
+            zombieManager.animator.SetFloat("Vertical", 0f, .2f, Time.deltaTime);
+            return this;
+        }
         MoveTowardsCurrentTarget(zombieManager);
         RotateTowardsTarget(zombieManager);
-        if (zombieManager.distanceFromCurrentTarget <= zombieManager.minAttackDistance)
+        if (zombieManager.distanceFromCurrentTarget <= zombieManager.maxAttackDistance)
         {
+            zombieManager.navMeshAgent.enabled = false;
             return attackState;
         }
         else

@@ -1724,7 +1724,8 @@ GameObject:
   - component: {fileID: 8547799796678201698}
   - component: {fileID: 6451015791639139997}
   - component: {fileID: 8400727872649813132}
-  - component: {fileID: 3282363053175345692}
+  - component: {fileID: 5760287288018641609}
+  - component: {fileID: 834035931128389855}
   m_Layer: 7
   m_Name: Zombie1
   m_TagString: Untagged
@@ -1797,15 +1798,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e1f211dd8244cb5acd4d108111f224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zombieAnimatorManager: {fileID: 834035931128389855}
   currentState: {fileID: 0}
   startingState: {fileID: 8162610315952329352}
+  isPerformingAction: 0
   currentTarget: {fileID: 0}
   distanceFromCurrentTarget: 0
-  animator: {fileID: 0}
+  animator: {fileID: 7389507112651452681}
   navMeshAgent: {fileID: 0}
-  rigidbody: {fileID: 0}
+  rigidbody: {fileID: 8400727872649813132}
   rotationSpeed: 5
+  attackCoolDownTimer: 0
+  maxAttackDistance: 3.5
   minAttackDistance: 1
+  viewableAngleFromCurrentTarget: 1
+  targetDirection: {x: 0, y: 0, z: 0}
 --- !u!136 &6451015791639139997
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1856,7 +1863,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &3282363053175345692
+--- !u!114 &5760287288018641609
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1865,7 +1872,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 4493914613880827488}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf82b2e3d723a46de8d66d356aef800e, type: 3}
+  m_Script: {fileID: 11500000, guid: e6fbe276ba14e49ba9fa1fbe457b1aa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &834035931128389855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493914613880827488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4238b7e0f3dc34bc0a1554798b0fb685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4585519724235478304
@@ -1879,6 +1898,7 @@ GameObject:
   - component: {fileID: 2742307235929306569}
   - component: {fileID: 8162610315952329352}
   - component: {fileID: 1267088983662544817}
+  - component: {fileID: 3719569800335899023}
   m_Layer: 7
   m_Name: States
   m_TagString: Untagged
@@ -1935,6 +1955,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb0ea8b598e71405da73c8bf378da387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3719569800335899023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4585519724235478304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf82b2e3d723a46de8d66d356aef800e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombieAttackActions: []
+  potentialAttacks: []
+  currentAttack: {fileID: 11400000, guid: 478242ec4975d4187b462175bd733fa5, type: 2}
+  hasPerformedAttack: 0
 --- !u!1 &4710940672626480558
 GameObject:
   m_ObjectHideFlags: 0
