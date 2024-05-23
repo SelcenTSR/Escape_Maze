@@ -5,11 +5,12 @@ using UnityEngine.AI;
 public class ZombieManager : MonoBehaviour
 {
      public ZombieAnimatorManager zombieAnimatorManager;
-
+    public ZombieStatManager zombieStatManager;
     [SerializeField] private State currentState;
     public IdleState startingState;
 
     public bool isPerformingAction;
+    public bool isDead;
 
     public PlayerController currentTarget;
     public float distanceFromCurrentTarget;
@@ -36,11 +37,16 @@ public class ZombieManager : MonoBehaviour
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         currentState = startingState;
         zombieAnimatorManager = GetComponent<ZombieAnimatorManager>();
+        zombieStatManager = GetComponent<ZombieStatManager>();
     }
 
     private void FixedUpdate()
     {
-        HandleStateMachine();
+        if (!isDead)
+        {
+            HandleStateMachine();
+        }
+       
     }
 
     private void Update()

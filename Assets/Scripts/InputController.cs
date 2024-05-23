@@ -7,6 +7,7 @@ public class InputController : MonoBehaviour
    [SerializeField] PlayerInputController inputActions;
     [SerializeField] PlayerAnimatorController playerAnimator;
     PlayerUIManager playerUIManager;
+    PlayerController playerController;
 
     [Header("Player Movement")]
     public float verticalMovementInput;
@@ -21,12 +22,15 @@ public class InputController : MonoBehaviour
     private Vector2 cameraInput;
     public bool runInput;
     public bool quickTurnInput;
+    public bool interactionInput;
 
     public bool shootInput;
     public bool aimingInput;
+    public bool reloadInput;
     // Start is called before the first frame update
     void Start()
     {
+        playerController = GetComponent<PlayerController>(); 
         playerUIManager = FindObjectOfType<PlayerUIManager>();
         playerAnimator = GetComponent<PlayerAnimatorController>();
     }
@@ -49,6 +53,12 @@ public class InputController : MonoBehaviour
 
             inputActions.PlayerActions.Shoot.performed += i => shootInput = true;
             inputActions.PlayerActions.Shoot.canceled += i => shootInput = false;
+
+            inputActions.PlayerActions.Reload.performed += i => reloadInput = true;
+            inputActions.PlayerActions.Reload.canceled += i => reloadInput = false;
+
+            inputActions.PlayerActions.Interact.performed += i => interactionInput = true;
+            inputActions.PlayerActions.Interact.canceled += i => interactionInput = false;
         }
         inputActions.Enable();
     }
@@ -64,6 +74,8 @@ public class InputController : MonoBehaviour
         HandleCameraInputs();
         HandleAmingInput();
         HandleShootingInput();
+        HandleReloadInput();
+        HandleInteractionInput();
     }
     void HandleMovementInputs()
     {
@@ -127,6 +139,60 @@ public class InputController : MonoBehaviour
             shootInput = false;
             Debug.Log("a");
             GetComponent<PlayerController>().UseWeapon();
+        }
+    }
+
+    private void HandleReloadInput()
+    {
+        if (reloadInput)
+        {
+            reloadInput = false;
+            if (playerController.playerEquipmentManager.weapon.remainingAmmo == playerController.playerEquipmentManager.weapon.maxAmmo)
+                return;
+
+            if(playerController.playerInventoryManager.currentAmmoInInventory
+                != null)
+            {
+                if (playerController.playerInventoryManager.currentAmmoInInventory.ammoType == playerController.playerEquipmentManager.weapon.ammoType)
+                {
+                    if (playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining==0)
+                        return;
+                    int amountOfAmmoToReload=0;
+                    amountOfAmmoToReload = playerController.playerEquipmentManager.weapon.maxAmmo - playerController.playerEquipmentManager.weapon.remainingAmmo;
+
+                    if (playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining >= amountOfAmmoToReload)
+                    {
+                        playerController.playerEquipmentManager.weapon.remainingAmmo = amountOfAmmoToReload+amountOfAmmoToReload;
+                        playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining -= amountOfAmmoToReload;
+                    }
+                    else
+                    {
+                        playerController.playerEquipmentManager.weapon.remainingAmmo = playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining;
+                        playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining = 0;
+                    }
+
+                    playerController.playerAnimator.ClearHandIKWeights();
+                    playerController.playerAnimator.PlayAnimation("Pistol_Reload", true);
+
+                    playerController.playerEquipmentManager.weapon.remainingAmmo = 12;
+                    playerController.playerUIManager.currentAmmoCountText.text = playerController.playerEquipmentManager.weapon.remainingAmmo.ToString();
+                    playerController.playerUIManager.reservedAmmoCountText.text = playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining.ToString();
+                    //play reload;
+                }
+            }
+
+           
+        }
+    }
+
+    private void HandleInteractionInput()
+    {
+        if (interactionInput)
+        {
+            if (playerController.canInteract)
+            {
+                interactionInput = false;
+            }
         }
     }
 

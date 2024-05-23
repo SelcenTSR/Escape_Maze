@@ -10,9 +10,10 @@ public class ZombieEffectManager : MonoBehaviour
     {
         zombieManager = GetComponent<ZombieManager>();
     }
-    public void DamageZombie()
+    public void DamageZombie(int damage)
     {
         zombieManager.isPerformingAction = true;
         zombieManager.animator.CrossFade("GetHit", .2f);
+        zombieManager.zombieStatManager.DealDamage(damage);
     }
 }

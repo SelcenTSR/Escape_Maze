@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,9 +29,17 @@ public class PlayerAnimatorController : MonoBehaviour
     }
     public void PlayAnimationWithoutRootMotion(string targetAnimation,bool isPerformingAction)
     {
+        animator.SetBool("isPerformingAction", isPerformingAction);
         animator.applyRootMotion = false;
         animator.CrossFade(targetAnimation, .2f);
     }
+
+    public void PlayAnimation(string targetAnimation, bool isPerformingAction)
+    {
+        animator.SetBool("isPerformingAction", isPerformingAction);
+        animator.CrossFade(targetAnimation, .2f);
+    }
+
     public void HandleAnimatorValues(float horizontalMovement,float verticalMovement,bool isRunning)
     {
         if (horizontalMovement > 0)
@@ -65,6 +74,24 @@ public class PlayerAnimatorController : MonoBehaviour
 
         animator.SetFloat("Horizontal", snappedHorizontal, 0.1f, Time.deltaTime);
         animator.SetFloat("Vertical", snappedVertical, 0.1f, Time.deltaTime);
+    }
+
+    public void ClearHandIKWeights()
+    {
+        rightHandIK.data.targetPositionWeight = 0;
+        rightHandIK.data.targetRotationWeight = 0;
+
+        leftHandIK.data.targetPositionWeight = 0;
+        leftHandIK.data.targetRotationWeight = 0;
+    }
+
+    public void RefreshHandIKWeights()
+    {
+        rightHandIK.data.targetPositionWeight = 1;
+        rightHandIK.data.targetRotationWeight = 1;
+
+        leftHandIK.data.targetPositionWeight = 1;
+        leftHandIK.data.targetRotationWeight = 1;
     }
 
     public void OnAnimationMove()
@@ -102,4 +129,6 @@ public class PlayerAnimatorController : MonoBehaviour
             head.weight = 0;
         }
     }
+
+    
 }

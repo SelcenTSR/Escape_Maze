@@ -4,21 +4,28 @@ using UnityEngine;
 using Cinemachine;
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] InputController inputController;
+    public InputController inputController;
     public Transform cameraHolderTransform;
     public float rotationSpeed = 3.5f;
     public Rigidbody playerRigidbody;
     Quaternion targetRotation;
     Quaternion playerRotation;
     public bool isAiming;
+    public bool canInteract;
     public bool isPerformingAction;
     Animator animator;
 
-    PlayerAnimatorController playerAnimator;
-    PlayerEquipmentManager playerEquipmentManager;
+    public PlayerInventoryManager playerInventoryManager;
+
+    public PlayerUIManager playerUIManager;
+
+    public PlayerAnimatorController playerAnimator;
+    public PlayerEquipmentManager playerEquipmentManager;
     // Start is called before the first frame update
     void Start()
     {
+        playerInventoryManager = GetComponent<PlayerInventoryManager>();
+        playerUIManager = FindAnyObjectByType<PlayerUIManager>();
         playerAnimator= GetComponent<PlayerAnimatorController>();
         animator = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
@@ -61,8 +68,18 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        playerAnimator.PlayAnimationWithoutRootMotion("Pistol_Shoot",true);
-        playerEquipmentManager.weaponManager.ShootWeapon();
+        if (playerEquipmentManager.weapon.remainingAmmo > 0)
+        {
+            playerEquipmentManager.weapon.remainingAmmo -= 1;
+            playerUIManager.currentAmmoCountText.text = playerEquipmentManager.weapon.remainingAmmo.ToString();
+            playerAnimator.PlayAnimationWithoutRootMotion("Pistol_Shoot", true);
+            playerEquipmentManager.weaponManager.ShootWeapon();
+        }
+        else
+        {
+            Debug.Log("click");
+        }
+      
     }
 
   

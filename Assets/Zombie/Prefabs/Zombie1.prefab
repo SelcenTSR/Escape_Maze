@@ -1726,6 +1726,7 @@ GameObject:
   - component: {fileID: 8400727872649813132}
   - component: {fileID: 5760287288018641609}
   - component: {fileID: 834035931128389855}
+  - component: {fileID: 8458481746683749806}
   m_Layer: 7
   m_Name: Zombie1
   m_TagString: Untagged
@@ -1799,9 +1800,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombieAnimatorManager: {fileID: 834035931128389855}
+  zombieStatManager: {fileID: 0}
   currentState: {fileID: 0}
   startingState: {fileID: 8162610315952329352}
   isPerformingAction: 0
+  isDead: 0
   currentTarget: {fileID: 0}
   distanceFromCurrentTarget: 0
   animator: {fileID: 7389507112651452681}
@@ -1809,7 +1812,7 @@ MonoBehaviour:
   rigidbody: {fileID: 8400727872649813132}
   rotationSpeed: 5
   attackCoolDownTimer: 0
-  maxAttackDistance: 3.5
+  maxAttackDistance: 1.5
   minAttackDistance: 1
   viewableAngleFromCurrentTarget: 1
   targetDirection: {x: 0, y: 0, z: 0}
@@ -1887,6 +1890,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4238b7e0f3dc34bc0a1554798b0fb685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8458481746683749806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493914613880827488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c954ccd196244644933d406676157d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overallHealth: 100
 --- !u!1 &4585519724235478304
 GameObject:
   m_ObjectHideFlags: 0

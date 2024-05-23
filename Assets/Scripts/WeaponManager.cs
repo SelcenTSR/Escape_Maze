@@ -4,6 +4,9 @@ using UnityEngine;
 using DG.Tweening;
 public class WeaponManager : MonoBehaviour
 {
+    PlayerController playerController;
+    Animator weaponAnimator;
+
 
     [Header("Weapon FX")]
     public GameObject weaponMuzzleFlashFX;
@@ -17,7 +20,8 @@ public class WeaponManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        weaponAnimator = GetComponentInChildren<Animator>();
+        playerController = GetComponentInParent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -40,7 +44,7 @@ public class WeaponManager : MonoBehaviour
             ZombieEffectManager zombie = hit.collider.GetComponent<ZombieEffectManager>();
             if (zombie != null)
             {
-                zombie.DamageZombie();
+                zombie.DamageZombie(playerController.playerEquipmentManager.weapon.damage);
             }
         }
 
