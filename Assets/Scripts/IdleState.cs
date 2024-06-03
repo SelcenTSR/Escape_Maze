@@ -67,6 +67,7 @@ public class IdleState : State
                     }
                     else
                     {
+                        if (playerController.isDead) return;
                         zombieManager.currentTarget = playerController;
                         Debug.Log("target detected"+ zombieManager.currentTarget);
                        

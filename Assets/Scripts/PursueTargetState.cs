@@ -16,6 +16,7 @@ public class PursueTargetState : State
     {
         if (zombieManager.isPerformingAction)
         {
+            RotateTowardsTargetWhilstAttacking(zombieManager);
             zombieManager.animator.SetFloat("Vertical", 0f, .2f, Time.deltaTime);
             return this;
         }
@@ -30,8 +31,7 @@ public class PursueTargetState : State
         {
             return this;
         }
-       
-        return this;
+
     }
 
     private void MoveTowardsCurrentTarget(ZombieManager zombieManager)
@@ -41,8 +41,26 @@ public class PursueTargetState : State
 
     private void RotateTowardsTarget(ZombieManager zombieManager)
     {
+        if (!zombieManager.canRotate) return;
         zombieManager.navMeshAgent.enabled = true;
         zombieManager.navMeshAgent.SetDestination(zombieManager.currentTarget.transform.position);
         zombieManager.transform.rotation = Quaternion.Slerp(zombieManager.transform.rotation, zombieManager.navMeshAgent.transform.rotation,zombieManager.rotationSpeed/Time.deltaTime);
+    }
+
+    private void RotateTowardsTargetWhilstAttacking(ZombieManager zombieManager)
+    {
+        if (!zombieManager.canRotate) return;
+        Vector3 dir = zombieManager.currentTarget.transform.position - zombieManager.transform.position;
+        dir.y = 0;
+        dir.Normalize();
+
+        if (dir == Vector3.zero)
+        {
+            dir = zombieManager.transform.forward;
+        }
+
+        Quaternion targetRot = Quaternion.LookRotation(dir);
+        zombieManager.transform.rotation = Quaternion.Slerp(zombieManager.transform.rotation, targetRot, zombieManager.rotationSpeed * Time.deltaTime);
+
     }
 }

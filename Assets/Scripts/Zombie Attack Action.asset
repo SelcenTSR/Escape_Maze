@@ -16,5 +16,5 @@ MonoBehaviour:
   attackCoolDown: 2
   maxAttackAngle: 20
   minAttackAngle: -20
-  maxAttackDistance: 1
-  minAttackDistance: 1.5
+  maxAttackDistance: 5
+  minAttackDistance: 0.5

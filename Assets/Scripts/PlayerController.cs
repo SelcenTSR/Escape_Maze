@@ -8,22 +8,26 @@ public class PlayerController : MonoBehaviour
     public Transform cameraHolderTransform;
     public float rotationSpeed = 3.5f;
     public Rigidbody playerRigidbody;
+
     Quaternion targetRotation;
     Quaternion playerRotation;
+
     public bool isAiming;
     public bool canInteract;
     public bool isPerformingAction;
+    public bool isDead;
+
     Animator animator;
 
     public PlayerInventoryManager playerInventoryManager;
-
     public PlayerUIManager playerUIManager;
-
     public PlayerAnimatorController playerAnimator;
     public PlayerEquipmentManager playerEquipmentManager;
+    public PlayerStatManager playerStatManager;
     // Start is called before the first frame update
     void Start()
     {
+        playerStatManager = GetComponent<PlayerStatManager>();
         playerInventoryManager = GetComponent<PlayerInventoryManager>();
         playerUIManager = FindAnyObjectByType<PlayerUIManager>();
         playerAnimator= GetComponent<PlayerAnimatorController>();
@@ -41,6 +45,7 @@ public class PlayerController : MonoBehaviour
         inputController.HandleInputs();
         isPerformingAction = animator.GetBool("isPerformingAction");
         isAiming = animator.GetBool("isAiming");
+        animator.SetBool("isDead", isDead);
     }
     public void HandleRotation()
     {

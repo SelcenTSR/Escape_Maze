@@ -11,11 +11,18 @@ public class ZombieAnimatorManager : MonoBehaviour
         zombieManager = GetComponent<ZombieManager>();
     }
 
+    public void PlayGrappleAnimation(string grappleAnimation, bool useRootMotion)
+    {
+        zombieManager.animator.applyRootMotion = useRootMotion;
+        zombieManager.isPerformingAction = transform;
+        zombieManager.animator.CrossFade(grappleAnimation, .2f);
+    }
+
     public void PlayTargetAttackAnimation(string attackAnimation)
     {
         zombieManager.animator.applyRootMotion = true;
         zombieManager.isPerformingAction = true;
-        zombieManager.animator.CrossFade(attackAnimation, .2f);
+        zombieManager.animator.CrossFade(attackAnimation, .2f,1);
     }
 
     public void PlayTargetActionAnimation(string actionAnimation)

@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.AI;
 public class ZombieManager : MonoBehaviour
 {
-     public ZombieAnimatorManager zombieAnimatorManager;
+    public ZombieCombatManager zombieCombatManager;
+    public ZombieAnimatorManager zombieAnimatorManager;
     public ZombieStatManager zombieStatManager;
     [SerializeField] private State currentState;
     public IdleState startingState;
 
     public bool isPerformingAction;
     public bool isDead;
+    public bool canRotate;
 
     public PlayerController currentTarget;
     public float distanceFromCurrentTarget;
@@ -32,6 +34,7 @@ public class ZombieManager : MonoBehaviour
 
     private void Awake()
     {
+        zombieCombatManager = GetComponent<ZombieCombatManager>();
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
