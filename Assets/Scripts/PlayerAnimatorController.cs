@@ -100,8 +100,8 @@ public class PlayerAnimatorController : MonoBehaviour
         animatorDeltaPos.y = 0;
 
         Vector3 velocity = animatorDeltaPos / Time.deltaTime;
-        playerController.playerRigidbody.drag = 0;
-        playerController.playerRigidbody.velocity = velocity;
+        playerController.playerRigidbody.linearDamping = 0;
+        playerController.playerRigidbody.linearVelocity = velocity;
         transform.rotation *= animator.deltaRotation;
     }
 

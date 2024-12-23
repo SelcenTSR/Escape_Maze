@@ -24,6 +24,10 @@ public class PlayerStatManager : MonoBehaviour
         {
             Dead();
         }
+        else
+        {
+            player.playerUIManager.DisplayHealthPopUp();
+        }
     }
 
     private void Dead()
@@ -32,7 +36,8 @@ public class PlayerStatManager : MonoBehaviour
         {
             player.playerAnimator.PlayAnimation("Player Dead", true);
         }
- 
+
+
         player.isDead = true;
     }
 }

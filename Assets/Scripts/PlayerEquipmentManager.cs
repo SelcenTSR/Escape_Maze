@@ -18,7 +18,7 @@ public class PlayerEquipmentManager : MonoBehaviour
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
-        animatorController = GetComponent<PlayerAnimatorController>();  
+        animatorController = GetComponent<PlayerAnimatorController>();
         LoadWeaponLoaderSlot();
     }
     private void Start()
@@ -40,12 +40,11 @@ public class PlayerEquipmentManager : MonoBehaviour
         rightHandIK = weaponLoaderSlot.currentWeaponModel.GetComponentInChildren<RightHandIKTarget>();
         leftHandIK = weaponLoaderSlot.currentWeaponModel.GetComponentInChildren<LeftHandIKTarget>();
         weaponManager = weaponLoaderSlot.currentWeaponModel.GetComponentInChildren<WeaponManager>();
-        animatorController.AssignHandIK(rightHandIK,leftHandIK);
-
+        animatorController.AssignHandIK(rightHandIK, leftHandIK);
         playerController.playerUIManager.currentAmmoCountText.text = weapon.remainingAmmo.ToString();
 
-       
-        if (playerController.playerInventoryManager.currentAmmoInInventory!=null && playerController.playerInventoryManager.currentAmmoInInventory.ammoType == weapon.ammoType)
+
+        if (playerController.playerInventoryManager.currentAmmoInInventory != null && playerController.playerInventoryManager.currentAmmoInInventory.ammoType == weapon.ammoType)
         {
             playerController.playerUIManager.reservedAmmoCountText.text = playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining.ToString();
         }

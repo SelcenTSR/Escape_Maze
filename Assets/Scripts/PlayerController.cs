@@ -25,12 +25,11 @@ public class PlayerController : MonoBehaviour
     public PlayerEquipmentManager playerEquipmentManager;
     public PlayerStatManager playerStatManager;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         playerStatManager = GetComponent<PlayerStatManager>();
         playerInventoryManager = GetComponent<PlayerInventoryManager>();
-        playerUIManager = FindAnyObjectByType<PlayerUIManager>();
-        playerAnimator= GetComponent<PlayerAnimatorController>();
+        playerAnimator = GetComponent<PlayerAnimatorController>();
         animator = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
         playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
@@ -64,7 +63,7 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = playerRotation;
             }
         }
-        
+
     }
 
     public void UseWeapon()
@@ -84,8 +83,8 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("click");
         }
-      
+
     }
 
-  
+
 }

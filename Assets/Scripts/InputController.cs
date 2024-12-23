@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-   [SerializeField] PlayerInputController inputActions;
+    [SerializeField] PlayerInputController inputActions;
     [SerializeField] PlayerAnimatorController playerAnimator;
     PlayerUIManager playerUIManager;
     PlayerController playerController;
@@ -30,7 +30,7 @@ public class InputController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerController = GetComponent<PlayerController>(); 
+        playerController = GetComponent<PlayerController>();
         playerUIManager = FindObjectOfType<PlayerUIManager>();
         playerAnimator = GetComponent<PlayerAnimatorController>();
     }
@@ -40,9 +40,9 @@ public class InputController : MonoBehaviour
         {
             inputActions = new PlayerInputController();
             inputActions.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>(); // basılı tuşlar movementInput'a atanır
-            inputActions.PlayerMovement.CameraRotation.performed+= i => cameraInput = i.ReadValue<Vector2>();
+            inputActions.PlayerMovement.CameraRotation.performed += i => cameraInput = i.ReadValue<Vector2>();
 
-            inputActions.PlayerMovement.Run.performed += i => runInput=true;
+            inputActions.PlayerMovement.Run.performed += i => runInput = true;
             inputActions.PlayerMovement.Run.canceled += i => runInput = false;
 
             inputActions.PlayerMovement.QuickTurn.performed += i => quickTurnInput = true;
@@ -81,7 +81,7 @@ public class InputController : MonoBehaviour
     {
         horizontalMovementInput = movementInput.x;
         verticalMovementInput = movementInput.y;
-        playerAnimator.HandleAnimatorValues(horizontalMovementInput, verticalMovementInput,runInput);
+        playerAnimator.HandleAnimatorValues(horizontalMovementInput, verticalMovementInput, runInput);
 
         if (verticalMovementInput != 0 || horizontalMovementInput != 0)
         {
@@ -99,19 +99,19 @@ public class InputController : MonoBehaviour
     {
         horizontalCameraMovement = cameraInput.x;
         verticalCameraMovement = cameraInput.y;
-       
+
     }
     void HandleQuickTurnInput()
     {
         if (quickTurnInput)
         {
-            playerAnimator.PlayAnimationWithoutRootMotion("Quick Turn",true);
+            playerAnimator.PlayAnimationWithoutRootMotion("Quick Turn", true);
         }
     }
 
     private void HandleAmingInput()
     {
-        if(verticalMovementInput!=0 || horizontalMovementInput != 0)
+        if (verticalMovementInput != 0 || horizontalMovementInput != 0)
         {
             aimingInput = false;
             playerAnimator.animator.SetBool("isAiming", false);
@@ -150,19 +150,19 @@ public class InputController : MonoBehaviour
             if (playerController.playerEquipmentManager.weapon.remainingAmmo == playerController.playerEquipmentManager.weapon.maxAmmo)
                 return;
 
-            if(playerController.playerInventoryManager.currentAmmoInInventory
+            if (playerController.playerInventoryManager.currentAmmoInInventory
                 != null)
             {
                 if (playerController.playerInventoryManager.currentAmmoInInventory.ammoType == playerController.playerEquipmentManager.weapon.ammoType)
                 {
-                    if (playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining==0)
+                    if (playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining == 0)
                         return;
-                    int amountOfAmmoToReload=0;
+                    int amountOfAmmoToReload = 0;
                     amountOfAmmoToReload = playerController.playerEquipmentManager.weapon.maxAmmo - playerController.playerEquipmentManager.weapon.remainingAmmo;
 
                     if (playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining >= amountOfAmmoToReload)
                     {
-                        playerController.playerEquipmentManager.weapon.remainingAmmo = amountOfAmmoToReload+amountOfAmmoToReload;
+                        playerController.playerEquipmentManager.weapon.remainingAmmo = amountOfAmmoToReload + amountOfAmmoToReload;
                         playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining -= amountOfAmmoToReload;
                     }
                     else
@@ -181,7 +181,7 @@ public class InputController : MonoBehaviour
                 }
             }
 
-           
+
         }
     }
 
@@ -189,7 +189,7 @@ public class InputController : MonoBehaviour
     {
         if (interactionInput)
         {
-            if (playerController.canInteract)
+            if (!playerController.canInteract)
             {
                 interactionInput = false;
             }

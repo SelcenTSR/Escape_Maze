@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2f8b1a296914fdda26e5382c54671d, type: 3}
   m_Name: Box Of Pistol Ammo
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Pistol Ammo
   itemModel: {fileID: 0}
   ammoType: 0
-  ammoRemaining: 50
+  ammoRemaining: 34
   boxOfAmmoCapacity: 50
