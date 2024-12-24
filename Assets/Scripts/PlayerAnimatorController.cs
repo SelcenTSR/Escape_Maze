@@ -11,8 +11,8 @@ public class PlayerAnimatorController : MonoBehaviour
     float snappedVertical;
     PlayerController playerController;
 
-   [SerializeField] RigBuilder rigBuilder;// hold the weapon properly
-    public TwoBoneIKConstraint rightHandIK,leftHandIK;
+    [SerializeField] RigBuilder rigBuilder;// hold the weapon properly
+    public TwoBoneIKConstraint rightHandIK, leftHandIK;
 
 
     [Header("Aiming Constraints")]
@@ -27,7 +27,7 @@ public class PlayerAnimatorController : MonoBehaviour
         animator = GetComponent<Animator>();
         playerController = GetComponent<PlayerController>();
     }
-    public void PlayAnimationWithoutRootMotion(string targetAnimation,bool isPerformingAction)
+    public void PlayAnimationWithoutRootMotion(string targetAnimation, bool isPerformingAction)
     {
         animator.SetBool("isPerformingAction", isPerformingAction);
         animator.applyRootMotion = false;
@@ -40,13 +40,13 @@ public class PlayerAnimatorController : MonoBehaviour
         animator.CrossFade(targetAnimation, .2f);
     }
 
-    public void HandleAnimatorValues(float horizontalMovement,float verticalMovement,bool isRunning)
+    public void HandleAnimatorValues(float horizontalMovement, float verticalMovement, bool isRunning)
     {
         if (horizontalMovement > 0)
         {
             snappedHorizontal = 1;
         }
-        else if(horizontalMovement < 0 )
+        else if (horizontalMovement < 0)
         {
             snappedHorizontal = -1;
         }
@@ -67,11 +67,12 @@ public class PlayerAnimatorController : MonoBehaviour
             snappedVertical = 0;
         }
 
-        if (isRunning && snappedVertical>0)
+        if (isRunning && snappedVertical > 0)
         {
             snappedVertical = 2;
         }
-
+        if (horizontalMovement != 0 || verticalMovement != 0)
+            animator.applyRootMotion = true;
         animator.SetFloat("Horizontal", snappedHorizontal, 0.1f, Time.deltaTime);
         animator.SetFloat("Vertical", snappedVertical, 0.1f, Time.deltaTime);
     }
@@ -114,7 +115,7 @@ public class PlayerAnimatorController : MonoBehaviour
     }
 
 
-   public void UpdateAimConstraints()
+    public void UpdateAimConstraints()
     {
         if (playerController.isAiming)
         {
@@ -130,5 +131,5 @@ public class PlayerAnimatorController : MonoBehaviour
         }
     }
 
-    
+
 }

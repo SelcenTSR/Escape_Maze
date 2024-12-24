@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public PlayerAnimatorController playerAnimator;
     public PlayerEquipmentManager playerEquipmentManager;
     public PlayerStatManager playerStatManager;
+    public GameObject bloodExplosion, bloodPool;
     // Start is called before the first frame update
     void Awake()
     {
@@ -86,5 +87,15 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void BloodExplosion()
+    {
+        bloodExplosion.SetActive(true);
+        bloodExplosion.GetComponent<ParticleSystem>().Play();
+    }
+    public void BloodPool()
+    {
+        bloodPool.SetActive(true);
+        bloodExplosion.GetComponent<ParticleSystem>().Play();
+    }
 
 }

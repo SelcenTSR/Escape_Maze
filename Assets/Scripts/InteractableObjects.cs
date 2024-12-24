@@ -24,7 +24,7 @@ public class InteractableObjects : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (player == null)
+        if (player != null)
         {
             if (player.inputController.interactionInput)
             {

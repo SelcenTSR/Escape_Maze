@@ -4,5 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: bef4e39406e884f4aaa7e698bd31f065
+  - enabled: 1
+    path: Assets/Scenes/EscapeMaze.unity
+    guid: 63c0fa90bd96aab47a2ea07c7592b439
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

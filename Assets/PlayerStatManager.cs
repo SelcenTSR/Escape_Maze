@@ -19,6 +19,7 @@ public class PlayerStatManager : MonoBehaviour
 
     public void TakeDamage()
     {
+        player.BloodExplosion();
         playerHealth = playerHealth - pendingDamage;
         if (playerHealth <= 0)
         {
@@ -39,5 +40,7 @@ public class PlayerStatManager : MonoBehaviour
 
 
         player.isDead = true;
+        player.playerUIManager.gameOverPanel.SetActive(true);
+        player.BloodPool();
     }
 }

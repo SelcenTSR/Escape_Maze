@@ -12,9 +12,9 @@ public class ZombieAttackAction : ScriptableObject
     public float attackCoolDown = 5f; // başka bir saldırı için bekleme süresi
 
     [Header("Attack Angles & Distances")]
-    public float maxAttackAngle = 20f; // zombienin saldırı için player'a maximum bakış açısı
-    public float minAttackAngle = -20f;
-    public float maxAttackDistance=1f;
-    public float minAttackDistance=3.5f;
+    public float maxAttackAngle = 25f; // zombienin saldırı için player'a maximum bakış açısı
+    public float minAttackAngle = -25f;
+    public float maxAttackDistance = 1f;
+    public float minAttackDistance = 6f;
 
 }
