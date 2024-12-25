@@ -622,8 +622,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2.0041592
+  m_Radius: 0.6
+  m_Height: 2.33
   m_Direction: 1
   m_Center: {x: 0, y: 0.9971179, z: 0}
 --- !u!114 &1337919385802690374
@@ -670,7 +670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6a2643df5314036867952d796f4cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAmmoInInventory: {fileID: 11400000, guid: 924cb89df47ab4a33a8872124a64c6c5, type: 2}
+  currentAmmoInInventory: {fileID: 0}
 --- !u!114 &8421295102035406579
 MonoBehaviour:
   m_ObjectHideFlags: 0

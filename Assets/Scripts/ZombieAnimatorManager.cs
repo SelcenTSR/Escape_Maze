@@ -22,7 +22,7 @@ public class ZombieAnimatorManager : MonoBehaviour
     {
         zombieManager.animator.applyRootMotion = true;
         zombieManager.isPerformingAction = true;
-        zombieManager.animator.CrossFade(attackAnimation, .2f,1);
+        zombieManager.animator.CrossFade(attackAnimation, .2f, 1);
     }
 
     public void PlayTargetActionAnimation(string actionAnimation)

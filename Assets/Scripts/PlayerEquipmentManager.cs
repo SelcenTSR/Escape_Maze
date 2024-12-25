@@ -49,4 +49,9 @@ public class PlayerEquipmentManager : MonoBehaviour
             playerController.playerUIManager.reservedAmmoCountText.text = playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining.ToString();
         }
     }
+    public void SetAmmoEquipment()
+    {
+        playerController.playerUIManager.reservedAmmoCountText.text = playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining.ToString();
+    }
+
 }

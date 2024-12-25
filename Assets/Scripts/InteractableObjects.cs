@@ -50,6 +50,7 @@ public class InteractableObjects : MonoBehaviour
 
     protected virtual void Interact(PlayerController player)
     {
-        Debug.Log("interacted");
+        Debug.Log("interacted" + player);
+
     }
 }

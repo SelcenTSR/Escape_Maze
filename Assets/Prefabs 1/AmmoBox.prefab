@@ -199,8 +199,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2995502806840052637}
-  - component: {fileID: 2049514926480390930}
   - component: {fileID: 4241528774814741719}
+  - component: {fileID: 8868707897563427866}
   m_Layer: 0
   m_Name: AmmoBox
   m_TagString: Untagged
@@ -224,19 +224,6 @@ Transform:
   - {fileID: 6055340466923894176}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2049514926480390930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8592802747694379139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fc9177cbf0154e2f99e59bd3588d295, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactableCanvas: {fileID: 3606191212627766886}
 --- !u!135 &4241528774814741719
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -256,8 +243,22 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.62
-  m_Center: {x: -0.1, y: 0.54, z: 0}
+  m_Radius: 0.83
+  m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &8868707897563427866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8592802747694379139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49640eaa29a1d4e4898198ca95eafb8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableCanvas: {fileID: 3606191212627766886}
+  boxOfAmmoItem: {fileID: 11400000, guid: 924cb89df47ab4a33a8872124a64c6c5, type: 2}
 --- !u!1001 &6055340466924023584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -311,11 +312,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300002, guid: 3fe47bcef97348f4e8fbc0553a357aeb, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: e79ae95429235264d93c3ad5628aa9a8, type: 2}
     - target: {fileID: 2300004, guid: 3fe47bcef97348f4e8fbc0553a357aeb, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: e79ae95429235264d93c3ad5628aa9a8, type: 2}
     m_RemovedComponents: []

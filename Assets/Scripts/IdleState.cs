@@ -11,11 +11,11 @@ public class IdleState : State
 
     //how far away we can detect a target
     [SerializeField] LayerMask detectionLayer;
-    [SerializeField] float detectionRadius=5;
+    [SerializeField] float detectionRadius = 20;
 
     //how wide away we can see  a target within our field of view
-    [SerializeField] float minDetectionRadiusAngle = -50f;
-    [SerializeField] float maxDetectionRadiusAngle = 50f;
+    [SerializeField] float minDetectionRadiusAngle = -60f;
+    [SerializeField] float maxDetectionRadiusAngle = 60f;
 
     // we make our character idle until tehy find a potential target
 
@@ -26,7 +26,7 @@ public class IdleState : State
 
     public override State Tick(ZombieManager zombieManager)
     {
-        if(zombieManager.currentTarget!=null)
+        if (zombieManager.currentTarget != null)
         {
             return pursueTargetState;
         }
@@ -41,7 +41,7 @@ public class IdleState : State
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, detectionLayer);
 
-        for(int i = 0; i < colliders.Length; i++)
+        for (int i = 0; i < colliders.Length; i++)
         {
             PlayerController playerController = colliders[i].transform.GetComponent<PlayerController>();
 
@@ -57,11 +57,11 @@ public class IdleState : State
                 if (viewableAngle > minDetectionRadiusAngle && viewableAngle < maxDetectionRadiusAngle)
                 {
                     //this make sure raycast start from the floor
-                    Vector3 playerStartPoint=new Vector3(playerController.transform.position.x,characterEyeLevel, playerController.transform.position.z);
-                    Vector3 zombieStartPoint= new Vector3(transform.position.x, characterEyeLevel, transform.position.z);
+                    Vector3 playerStartPoint = new Vector3(playerController.transform.position.x, characterEyeLevel, playerController.transform.position.z);
+                    Vector3 zombieStartPoint = new Vector3(transform.position.x, characterEyeLevel, transform.position.z);
                     Debug.DrawLine(playerStartPoint, zombieStartPoint, Color.red);
                     RaycastHit hit;
-                    if(Physics.Linecast(playerStartPoint,zombieStartPoint,out hit,ignoreForLineOfSightDetection))
+                    if (Physics.Linecast(playerStartPoint, zombieStartPoint, out hit, ignoreForLineOfSightDetection))
                     {
                         Debug.Log("There is smt in the way");
                     }
@@ -69,10 +69,10 @@ public class IdleState : State
                     {
                         if (playerController.isDead) return;
                         zombieManager.currentTarget = playerController;
-                        Debug.Log("target detected"+ zombieManager.currentTarget);
-                       
+                        Debug.Log("target detected" + zombieManager.currentTarget);
+
                     }
-                   
+
                 }
             }
         }

@@ -23,7 +23,7 @@ public class ZombieManager : MonoBehaviour
 
     public Rigidbody rigidbody;
 
-    public float rotationSpeed=5;
+    public float rotationSpeed = 5;
 
     public float attackCoolDownTimer;
     public float maxAttackDistance = 3.5f;
@@ -49,7 +49,7 @@ public class ZombieManager : MonoBehaviour
         {
             HandleStateMachine();
         }
-       
+
     }
 
     private void Update()
@@ -82,7 +82,7 @@ public class ZombieManager : MonoBehaviour
 
     }
 
- 
 
-  
+
+
 }
