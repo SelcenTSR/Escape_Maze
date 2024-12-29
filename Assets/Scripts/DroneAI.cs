@@ -39,7 +39,7 @@ public class DroneAI : MonoBehaviour
     }
     void Update()
     {
-        if (Vector3.Distance(transform.position, targetObject.transform.position) < 0.5f)
+        if (Vector3.Distance(transform.position, targetObject.transform.position) < 5f)
         {
             Destroy(gameObject);
         }
