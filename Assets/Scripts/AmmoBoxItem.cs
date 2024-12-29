@@ -7,6 +7,7 @@ public class AmmoBoxItem : InteractableObjects
     {
         base.Interact(player);
         player.playerInventoryManager.currentAmmoInInventory = boxOfAmmoItem;
+        player.playerInventoryManager.currentAmmoCountInInventory += player.playerInventoryManager.currentAmmoInInventory.boxOfAmmoCapacity;
         player.playerEquipmentManager.SetAmmoEquipment();
         Destroy(gameObject);
     }

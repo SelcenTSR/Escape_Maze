@@ -155,20 +155,20 @@ public class InputController : MonoBehaviour
             {
                 if (playerController.playerInventoryManager.currentAmmoInInventory.ammoType == playerController.playerEquipmentManager.weapon.ammoType)
                 {
-                    if (playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining == 0)
+                    if (playerController.playerInventoryManager.currentAmmoCountInInventory == 0)
                         return;
                     int amountOfAmmoToReload = 0;
                     amountOfAmmoToReload = playerController.playerEquipmentManager.weapon.maxAmmo - playerController.playerEquipmentManager.weapon.remainingAmmo;
 
-                    if (playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining >= amountOfAmmoToReload)
+                    if (playerController.playerInventoryManager.currentAmmoCountInInventory >= amountOfAmmoToReload)
                     {
                         playerController.playerEquipmentManager.weapon.remainingAmmo = amountOfAmmoToReload + amountOfAmmoToReload;
-                        playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining -= amountOfAmmoToReload;
+                        playerController.playerInventoryManager.currentAmmoCountInInventory -= amountOfAmmoToReload;
                     }
                     else
                     {
                         playerController.playerEquipmentManager.weapon.remainingAmmo = playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining;
-                        playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining = 0;
+                        playerController.playerInventoryManager.currentAmmoCountInInventory = 0;
                     }
 
                     playerController.playerAnimator.ClearHandIKWeights();
@@ -176,7 +176,7 @@ public class InputController : MonoBehaviour
 
                     playerController.playerEquipmentManager.weapon.remainingAmmo = 12;
                     playerController.playerUIManager.currentAmmoCountText.text = playerController.playerEquipmentManager.weapon.remainingAmmo.ToString();
-                    playerController.playerUIManager.reservedAmmoCountText.text = playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining.ToString();
+                    playerController.playerUIManager.reservedAmmoCountText.text = playerController.playerInventoryManager.currentAmmoCountInInventory.ToString();
                     //play reload;
                 }
             }

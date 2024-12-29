@@ -46,12 +46,12 @@ public class PlayerEquipmentManager : MonoBehaviour
 
         if (playerController.playerInventoryManager.currentAmmoInInventory != null && playerController.playerInventoryManager.currentAmmoInInventory.ammoType == weapon.ammoType)
         {
-            playerController.playerUIManager.reservedAmmoCountText.text = playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining.ToString();
+            playerController.playerUIManager.reservedAmmoCountText.text = playerController.playerInventoryManager.currentAmmoCountInInventory.ToString();
         }
     }
     public void SetAmmoEquipment()
     {
-        playerController.playerUIManager.reservedAmmoCountText.text = playerController.playerInventoryManager.currentAmmoInInventory.ammoRemaining.ToString();
+        playerController.playerUIManager.reservedAmmoCountText.text = playerController.playerInventoryManager.currentAmmoCountInInventory.ToString();
     }
 
 }

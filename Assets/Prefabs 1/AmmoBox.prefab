@@ -259,6 +259,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableCanvas: {fileID: 3606191212627766886}
   boxOfAmmoItem: {fileID: 11400000, guid: 924cb89df47ab4a33a8872124a64c6c5, type: 2}
+  ammoRemaining: 50
+  ammoType: 0
 --- !u!1001 &6055340466924023584
 PrefabInstance:
   m_ObjectHideFlags: 0
